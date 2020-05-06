@@ -1,23 +1,32 @@
-class Solution(object):
-    def mincostTickets(self, days, costs):
-        """
-        :type days: List[int]
-        :type costs: List[int]
-        :rtype: int
-        """
-        cost_days = [0] * 366
+class Solution:
+    def mincostTickets(self, days: List[int], costs: List[int]) -> int:
+        dp = []
+        for i in range(0, days[-1] + 1):
+            dp.append([0, 0, 0, 0])
 
-        index_days = 0
-        for i in range(1, 366):
-            if index_days >= len(days):
-                break
-            if i != days[index_days]:
-                cost_days[i] = cost_days[i - 1]
-                continue
-            
-            index_days += 1
-            cost_7 = (cost_days[i - 7]  if i >= 7 else 0) + costs[1]
-            cost_30 = (cost_days[i - 30] if i >= 30 else 0) + costs[2]
-            cost_days[i] = min(cost_days[i - 1] + costs[0], min(cost_7, cost_30))
-        
-        return cost_days[days[-1]]
+        set_days = set(days)
+        for i in range(1, len(dp)):
+            if i not in set_days:
+                dp[i][0] = dp[i-1][0]
+            else:
+                dp[i][0] = min(dp[i-1]) + costs[0]
+                for j in range(2, 31):
+                    if i - j + 1 >= 1:
+                        if j <= 7:
+                            dp[i][0] = min(dp[i][0], dp[i - j + 1][2])
+                        else:
+                            dp[i][0] = min(dp[i][0], dp[i - j + 1][3])
+                    else:
+                        if j <= 7:
+                            dp[i][0] = min(dp[i][0], costs[1])
+                        else:
+                            dp[i][0] = min(dp[i][0], costs[2])
+
+
+            pre_day_cost = min(dp[i-1])
+            dp[i][1] = pre_day_cost + costs[0] 
+            dp[i][2] = pre_day_cost + costs[1] 
+            dp[i][3] = pre_day_cost + costs[2] 
+
+
+        return min(dp[days[-1]])

@@ -1,0 +1,31 @@
+/**
+ * @param {string[]} cpdomains
+ * @return {string[]}
+ */
+var subdomainVisits = function(cpdomains) {
+    var domain2count = new Map()
+    var result = new Array()
+    for(var i = 0; i < cpdomains.length; i++) {
+        let content = cpdomains[i]
+        let tuples = content.split(" ")
+
+        let count = Number.parseInt(tuples[0])
+        let domain = tuples[1]
+        
+        for (let j = -1; j < domain.length; j++) {
+            if (j === -1 || domain[j] === '.') {
+                console.log(domain.substring(j+1))
+                let curCount = domain2count.get(domain.substring(j+1)) || 0
+                curCount += count
+                domain2count.set(domain.substring(j+1), curCount)
+            }
+        }
+    }
+
+    for (let [key, value] of domain2count) {
+        result.push(value.toString() + " " + key)
+    }
+
+    return result
+
+};

@@ -1,0 +1,17 @@
+/**
+ * @param {string} A
+ * @param {string} B
+ * @return {boolean}
+ */
+var rotateString = function(A, B) {
+    if (A.length == 0 && B.length == 0) {
+        return true
+    }
+    for (var i = 0; i < A.length; i++) {
+        if (A.substr(i, A.length) + A.substr(0, i) === B) {
+            return true
+        }
+    }
+    return false;
+
+};

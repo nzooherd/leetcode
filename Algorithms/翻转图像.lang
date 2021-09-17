@@ -1,0 +1,18 @@
+/**
+ * @param {number[][]} image
+ * @return {number[][]}
+ */
+var flipAndInvertImage = function(image) {
+    image.forEach(row => {
+        for (var i = 0; i * 2 < row.length; i++) {
+            let temp = row[i]
+            row[i] = row[row.length - i -1] 
+            row[row.length - i - 1] = temp
+        }
+        for (var i = 0; i < row.length; i++) {
+            row[i] =  1 - row[i]
+        }
+    })
+    return image
+
+};

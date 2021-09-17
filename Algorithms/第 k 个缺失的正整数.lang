@@ -1,0 +1,32 @@
+/**
+ * @param {number[]} arr
+ * @param {number} k
+ * @return {number}
+ */
+var findKthPositive = function(arr, k) {
+    var diffNum = new Array()
+    for (var i = 0; i < arr.length; i++) {
+        diffNum.push(arr[i] - i - 1)
+    }
+
+    var left = 0
+    var right = arr.length - 1
+    while (left <= right) {
+        var mid = Math.floor((left + right) / 2)
+        if (diffNum[mid] < k) {
+            left = mid + 1 
+        } else {
+            right = mid - 1
+        }
+    }
+    if (right == -1) {
+        return k
+    }
+    if (diffNum[right] == k) {
+        return arr[right] - 1
+    } else {
+        return arr[right] + (k - diffNum[right])
+    }
+
+
+};

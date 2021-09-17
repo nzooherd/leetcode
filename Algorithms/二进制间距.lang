@@ -1,0 +1,23 @@
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var binaryGap = function(n) {
+    var result = 0    
+    var last_1_index = -1
+    var cur_index = -1
+    while(n > 0) {
+        cur_index += 1
+        let end = n % 2
+        if (end == 1) {
+           if (last_1_index != -1) {
+               result = Math.max(result, cur_index - last_1_index)
+           } 
+           last_1_index = cur_index
+        }
+        n = Math.floor(n/2)
+    }
+    return result
+
+
+};

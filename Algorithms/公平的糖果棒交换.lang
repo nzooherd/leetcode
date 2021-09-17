@@ -1,0 +1,19 @@
+/**
+ * @param {number[]} A
+ * @param {number[]} B
+ * @return {number[]}
+ */
+var fairCandySwap = function(A, B) {
+    var sum1 = A.reduce((a, b) => a + b, 0)
+    var sum2 = B.reduce((a, b) => a + b, 0)
+    var average = (sum1 + sum2) / 2
+    for (var i = 0; i < A.length; i++) {
+        for (var j = 0; j < B.length; j++) {
+            if (A[i] - B[j] == (sum1 - average)) {
+                return [A[i], B[j]]
+            }
+        }
+    }
+
+
+};

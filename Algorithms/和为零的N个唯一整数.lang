@@ -1,0 +1,20 @@
+func sumZero(n int) []int {
+	res := make([]int, n)
+	var index, start int
+    start = 1
+
+	if n%2 == 1 {
+		res[0] = 0
+		index += 1
+		n -= 1
+	}
+
+	for ; n > 0; n -= 2 {
+		res[index] = start
+		index++
+		res[index] = -start
+		index++
+		start += 1
+	}
+	return res
+}

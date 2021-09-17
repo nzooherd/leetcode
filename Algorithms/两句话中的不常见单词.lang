@@ -1,0 +1,41 @@
+/**
+ * @param {string} A
+ * @param {string} B
+ * @return {string[]}
+ */
+var uncommonFromSentences = function(A, B) {
+    var item2count1 = new Map()
+    var item2count2 = new Map()
+    var itemsA = A.split(" ")
+    var itemsB = B.split(" ")
+
+    for(var index = 0; index < itemsA.length; index++) {
+        var item = itemsA[index].trim()
+        if (item2count1.has(item)) {
+            item2count1.set(item, item2count1.get(item) + 1)
+        } else {
+            item2count1.set(item, 1)
+        }
+    }
+    for(var index = 0; index < itemsB.length; index++) {
+        var item = itemsB[index].trim()
+        if (item2count2.has(item)) {
+            item2count2.set(item, item2count2.get(item) + 1)
+        } else {
+            item2count2.set(item, 1)
+        }
+    }
+    var res = new Array()
+    item2count1.forEach((value, key, map) => {
+        if (value == 1 && !item2count2.has(key)) {
+            res.push(key)
+        }
+    })
+    item2count2.forEach((value, key, map) => {
+        if (value == 1 && !item2count1.has(key)) {
+            res.push(key)
+        }
+    })
+    return res
+
+};

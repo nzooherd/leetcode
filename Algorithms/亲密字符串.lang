@@ -1,0 +1,32 @@
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {boolean}
+ */
+var buddyStrings = function(a, b) {
+    if (a.length != b.length) {
+        return false
+    }
+    var diffIndex = new Array()
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] != b[i]) {
+            diffIndex.push(i)
+        }
+    }
+    if (diffIndex.length >= 3 || diffIndex.length == 1) {
+        return false
+    }
+    if (diffIndex.length == 2) {
+        return (a[diffIndex[0]] == b[diffIndex[1]] && 
+            a[diffIndex[1]] == b[diffIndex[0]])
+    }
+    if (diffIndex.length == 0) {
+        var aCharSet = new Set()
+        for(var i = 0; i < a.length; i++) {
+            aCharSet.add(a[i])
+        }
+        return aCharSet.size < a.length
+    }
+    return false
+
+};

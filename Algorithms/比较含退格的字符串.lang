@@ -1,0 +1,28 @@
+/**
+ * @param {string} S
+ * @param {string} T
+ * @return {boolean}
+ */
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+
+var backspaceCompare = function(S, T) {
+    return calcuateStr(S) === calcuateStr(T) 
+};
+
+function calcuateStr(sourceStr) {
+    var index = 0 
+    for (var count = 0; count < sourceStr.length; count++) {
+        if (sourceStr[count] == '#') {
+            if (index > 0) {
+                index--
+            }
+            continue
+        }
+        sourceStr = sourceStr.replaceAt(index++, sourceStr[count])
+    }
+    console.log(sourceStr.substring(0, index))
+    return sourceStr.substring(0, index)
+
+}

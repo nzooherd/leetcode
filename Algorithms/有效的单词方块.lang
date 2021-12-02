@@ -1,0 +1,24 @@
+impl Solution {
+fn valid_word_square(words: Vec<String>) -> bool {
+    if words.len() == 0 {
+        return true;
+    }
+    for (row, word) in words.iter().enumerate() {
+        for (column, char) in word.chars().enumerate() {
+            if words.len() <= column {
+                return false
+            }
+            if words[column].chars().count() <= row {
+                return false
+            }
+            if char != words[column].chars().nth(row).unwrap() {
+                return false
+            }
+        }
+    }
+    return true;
+}
+
+
+
+}
